@@ -1,0 +1,36 @@
+.navbar .bg-body-tertiary{
+    position: absolute;
+    width: 100vw;
+}
+.container-fluid{
+    margin-top: 0;
+    box-shadow: -2px 0px 6px 0px rgb(0, 0, 0, 0.2);
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+
+}
+
+.quiz-card{
+    box-shadow: -2px 0px 6px 0px rgb(0, 0, 0, 0.2);
+    width: 30rem;
+}
+
+.question-footer{
+    display: flex;
+    justify-content: space-between;
+}
+
+.quiz_answer_card:hover{
+cursor: pointer;
+background-color:#dee2e6;
+}
+
+
+.bg-success, .bg-danger{   
+    color: white;
+}
