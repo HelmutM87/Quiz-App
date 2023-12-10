@@ -24,7 +24,7 @@ let questions = [
         "right_answer": 4
     },
     {
-        "question": "Welcher Computerpionier prägte den berühmten Satz: '640K sollte für jeden genug Speicher sein'?",
+        "question": "Welcher Computerpionier prägte den berühmten Satz: '640 kB sollte für jeden genug Speicher sein'?",
         "answer_1": "Steve Jobs",
         "answer_2": "Bill Gates",
         "answer_3": "Tim Berners-Lee",
@@ -48,6 +48,9 @@ let audioSuccess = new Audio('sounds/success.mp3');
 let audioWrong = new Audio('sounds/wrong.mp3');
 let winner = new Audio('sounds/winner.mp3');
 
+audioSuccess.volume = 0.2;
+audioWrong.volume = 0.5;
+winner.volume = 0.5;
 
 function init() {
     document.getElementById('number_of_questions_length').innerHTML = questions.length;
@@ -58,7 +61,7 @@ function init() {
 
 function showQuestion() {
 
-    if (currentQuestion >= questions.length) {
+    if (gameOver()) {
         showEndscreen();
     } else {
         showProgressBar();
@@ -66,6 +69,9 @@ function showQuestion() {
     }
 }
 
+function gameOver(){
+    return currentQuestion >= questions.length;
+}
 
 function showQuestionDetails() {
     let question = questions[currentQuestion];
@@ -102,6 +108,12 @@ function answer(selection) {
         document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-success');
         audioWrong.play();
     }
+    
+    document.getElementById('answer_parent_1').style.pointerEvents = 'none';
+    document.getElementById('answer_parent_2').style.pointerEvents = 'none';
+    document.getElementById('answer_parent_3').style.pointerEvents = 'none';
+    document.getElementById('answer_parent_4').style.pointerEvents = 'none';
+
     document.getElementById('next-button').disabled = false;
 }
 
@@ -113,16 +125,17 @@ function nextQuestion() {
     showQuestion();
 }
 
-
 function resetAnswerButtons() {
-    document.getElementById('answer_1').parentNode.classList.remove('bg-success')
-    document.getElementById('answer_1').parentNode.classList.remove('bg-danger')
-    document.getElementById('answer_2').parentNode.classList.remove('bg-danger')
-    document.getElementById('answer_2').parentNode.classList.remove('bg-success')
-    document.getElementById('answer_3').parentNode.classList.remove('bg-danger')
-    document.getElementById('answer_3').parentNode.classList.remove('bg-success')
-    document.getElementById('answer_4').parentNode.classList.remove('bg-danger')
-    document.getElementById('answer_4').parentNode.classList.remove('bg-success')
+
+    document.getElementById('answer_parent_1').style.pointerEvents = 'auto';
+    document.getElementById('answer_parent_2').style.pointerEvents = 'auto';
+    document.getElementById('answer_parent_3').style.pointerEvents = 'auto';
+    document.getElementById('answer_parent_4').style.pointerEvents = 'auto';
+
+    document.getElementById('answer_parent_1').classList.remove('bg-success', 'bg-danger');
+    document.getElementById('answer_parent_2').classList.remove('bg-success', 'bg-danger');
+    document.getElementById('answer_parent_3').classList.remove('bg-success', 'bg-danger');
+    document.getElementById('answer_parent_4').classList.remove('bg-success', 'bg-danger');
 }
 
 
